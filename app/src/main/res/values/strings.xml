@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">PUBG Guide</string>
+    <string name="query">Click To View Your PUBG Stats</string>
+    <string name="please_input">Please Input Your Name</string>
+    <string name="region">服务器</string>
+    <string name="mode">Mode</string>
+    <string name="done">Done</string>
+    <string name="data">Your stats</string>
+    <string name="server">Server</string>
+    <string name="wins">Wins</string>
+    <string name="win_lv">Win%</string>
+    <string name="top_10">Top 10</string>
+    <string name="most_kills">Most Kills</string>
+    <string name="longest_kill">Longest Kill</string>
+    <string name="headshot">Headshot</string>
+    <string name="solo">Solo</string>
+    <string name="duo">Duo</string>
+    <string name="squad">Squad</string>
+    <string name="avg_time">Average Time Survived</string>
+    <string name="umeng_key">5c0f8a44f1f556656700011f</string>
+    <string name="ADUnitID_Banner">ca-app-pub-9224978836240566/7986419622</string>
+    <string name="ADUnitID_Screen">ca-app-pub-9224978836240566/5256190792</string>
+    <string name="network_error">Network error</string>
+    <string name="network_success">Network success</string>
+    <string name="input_not_empty">Input can not be empty</string>
+    <string name="tip_title">It must view a video ad before download a high-definition wallpper.Or you subscrib app\'s VIP,then you can download directly.You can remove all ads in this app if you become a VIP.
+Congratulations you now,you get a chance for free trial VIP 7 days.</string>
+    <string name="view_ad">View a video ad </string>
+    <string name="trial">Free Trial VIP 7 Days</string>
+
+    <string name="hit_damage">命中伤害</string>
+    <string name="initial_bullet_speed">初始子弹速度</string>
+    <string name="body_hit_impact_power">击中身体冲击力</string>
+    <string name="zero_range">归零距离</string>
+    <string name="ammo_per_mag">弹夹容量</string>
+    <string name="time_between_shots">射击间隔</string>
+    <string name="firing_modes">射击模式</string>
+    <string name="weapon">武器</string>
+    <string name="notification">Notification</string>
+</resources>
