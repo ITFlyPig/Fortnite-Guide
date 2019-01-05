@@ -37,4 +37,14 @@ Congratulations you now,you get a chance for free trial VIP 7 days.</string>
     <string name="firing_modes">射击模式</string>
     <string name="weapon">武器</string>
     <string name="notification">Notification</string>
+
+
+    <string name="dps">DPS</string>
+    <string name="damage">Damage</string>
+    <string name="fire_rate">Fire_Rate</string>
+    <string name="magazine_size">Magazine_Size</string>
+    <string name="reload_time">Reload_Time</string>
+    <string name="muntion">Muntion</string>
+    <string name="rarity">Rarity</string>
+
 </resources>

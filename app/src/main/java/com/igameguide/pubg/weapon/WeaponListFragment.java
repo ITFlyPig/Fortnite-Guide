@@ -109,7 +109,7 @@ public class WeaponListFragment extends Fragment implements WeaponListContract.V
         }
         Intent intent = new Intent(WeaponListFragment.this.getActivity(), WeaponDetailActivity.class);
         intent.putExtra("data", bean);
-        intent.putExtra(ConstantValue.IntentKey.WEAPON_TYPE, ConstantValue.WeaponType.GUN);
+        intent.putExtra(ConstantValue.IntentKey.WEAPON_TYPE, ConstantValue.WeaponType.FORTNITE_WEAPON);
         startActivity(intent);
 
     };

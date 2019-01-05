@@ -19,5 +19,6 @@ public class ConstantValue {
         int GUN = 1;//枪
         int THROW_WEAPON = 2;//投掷武器
         int MELEE_WEAPON = 3;//近战武器
+        int FORTNITE_WEAPON = 4;//FORTNITE武器
     }
 }

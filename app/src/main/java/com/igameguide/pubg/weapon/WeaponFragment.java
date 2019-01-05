@@ -41,7 +41,7 @@ public class WeaponFragment extends Fragment implements View.OnClickListener {
     LinearLayout llContainer;
     Unbinder unbinder;
     private InterstitialAd mInterstitialAd;
-    private String[] mTitles = new String[]{"枪", "投掷物", "近战武器"};
+    private String[] mTitles = new String[]{"武器"};
     private List<Fragment> mFragments;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private MyPagerAdapter mAdapter;

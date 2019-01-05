@@ -44,14 +44,9 @@ public class WeaponDetailActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-         * 设置沉浸模式
-         */
-        SystemBarHelper.setAdaptStatusBar(getWindow());
 
         setContentView(R.layout.activity_weapondetail);
         ButterKnife.bind(this);
-        SystemBarHelper.updateAdaptStatusBar(tlTitle);
         mWeaponBean = (WeaponBean) getIntent().getSerializableExtra("data");
         mWeaponType = getIntent().getIntExtra(ConstantValue.IntentKey.WEAPON_TYPE, 0);
 
@@ -76,6 +71,7 @@ public class WeaponDetailActivity extends AppCompatActivity implements View.OnCl
         }
         Bitmap bitmap = BitmapFactory.decodeStream(is);
         GlideApp.with(this).load(bitmap).into(ivWeapon);
+        title.setText(mWeaponBean.name);
         if (mWeaponType == ConstantValue.WeaponType.GUN) {
             addItem(getResources().getString(R.string.hit_damage), mWeaponBean.hitDamage);
             addItem(getResources().getString(R.string.initial_bullet_speed), mWeaponBean.initBulletSpeed);
@@ -96,6 +92,15 @@ public class WeaponDetailActivity extends AppCompatActivity implements View.OnCl
             addItem("Activation_Time_Limit", mWeaponBean.timeLimit);
             addItem("Detonation", mWeaponBean.detonation);
             addItem("Explosion_Delay", mWeaponBean.explosionDelay);
+
+        } else if (mWeaponType == ConstantValue.WeaponType.FORTNITE_WEAPON) {
+            addItem(getResources().getString(R.string.dps), mWeaponBean.dps);
+            addItem(getResources().getString(R.string.damage), mWeaponBean.damage);
+            addItem(getResources().getString(R.string.fire_rate), mWeaponBean.fireRate);
+            addItem(getResources().getString(R.string.magazine_size), mWeaponBean.magazineSize);
+            addItem(getResources().getString(R.string.reload_time), mWeaponBean.reloadTime);
+            addItem(getResources().getString(R.string.muntion), mWeaponBean.muntion);
+            addItem(getResources().getString(R.string.rarity), mWeaponBean.rarity);
 
         }
 

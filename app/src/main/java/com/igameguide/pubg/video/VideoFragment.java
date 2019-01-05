@@ -42,7 +42,7 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
     LinearLayout llContainer;
     Unbinder unbinder;
     private InterstitialAd mInterstitialAd;
-    private String[] mTitles = new String[]{"PC视频", "手游视频", "搞笑视频"};
+    private String[] mTitles = new String[]{"PC视频"};
     private List<Fragment> mFragments;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private MyPagerAdapter mAdapter;

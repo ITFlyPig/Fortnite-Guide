@@ -97,7 +97,7 @@ public class DBHepler {
         if (context == null) {
             return;
         }
-        copyFromAssetTo(context, R.raw.data, DATABASE_NAME);
+        copyFromAssetTo(context, R.raw.data_fortnite, DATABASE_NAME);
     }
 
 
@@ -122,7 +122,7 @@ public class DBHepler {
      */
     public ArrayList<VideoItemBean> queryVideoBy(String language, String categroy) {
 
-        String sql="select * from videos where language='" + language +"' and categroy = '" + categroy + "'";
+        String sql="select * from videos where language='" + language +"'";
         Cursor cursor = mSQLiteDatabase.rawQuery(sql, null);
         try {
             return parseToBeans(cursor);
@@ -232,18 +232,18 @@ public class DBHepler {
         while (cursor.moveToNext()) {
             WeaponBean bean = new WeaponBean();
             if (cursor != null && cursor.getCount() != 0) {
-                bean.name = cursor.getString(cursor.getColumnIndex(GunsTable.NAME));
-                bean.hitDamage = cursor.getString(cursor.getColumnIndex(GunsTable.HIT_DAMAGE));
-                bean.initBulletSpeed = cursor.getString(cursor.getColumnIndex(GunsTable.INITIAL_BULLET_SPEED));
-                bean.bodyHitImpactPower = cursor.getString(cursor.getColumnIndex(GunsTable.BODY_HIT_IMPACT_POWER));
-                bean.zeroRange = cursor.getString(cursor.getColumnIndex(GunsTable.ZERO_RANGE));
-                bean.ammoPerMag = cursor.getString(cursor.getColumnIndex(GunsTable.AMMO_PER_MAG));
-                bean.timeBetweenShots = cursor.getString(cursor.getColumnIndex(GunsTable.TIME_BETWEEN_SHOTS));
-                bean.firingModes = cursor.getString(cursor.getColumnIndex(GunsTable.FIRING_MODES));
-                bean.shotCount = cursor.getString(cursor.getColumnIndex(GunsTable.SHOT_COUNT));
-                bean.category = cursor.getString(cursor.getColumnIndex(GunsTable.CATEGORY));
-                bean.logoId = cursor.getString(cursor.getColumnIndex(GunsTable.LOGO_ID));
-                bean.lanuage = cursor.getString(cursor.getColumnIndex(GunsTable.LANGUAGE));
+                bean.name = cursor.getString(cursor.getColumnIndex(FortniteTable.NAME));
+                bean.damage = cursor.getString(cursor.getColumnIndex(FortniteTable.DAMAGE));
+                bean.dps = cursor.getString(cursor.getColumnIndex(FortniteTable.DPS));
+                bean.fireRate = cursor.getString(cursor.getColumnIndex(FortniteTable.FIRE_RATE));
+                bean.magazineSize = cursor.getString(cursor.getColumnIndex(FortniteTable.MAGAZINE));
+                bean.reloadTime = cursor.getString(cursor.getColumnIndex(FortniteTable.RELOAD_TIME));
+                bean.muntion = cursor.getString(cursor.getColumnIndex(FortniteTable.MUNTION));
+                bean.rarity = cursor.getString(cursor.getColumnIndex(FortniteTable.RARITY));
+                bean.category = cursor.getString(cursor.getColumnIndex(FortniteTable.CATEGORY));
+                bean.logoId = cursor.getString(cursor.getColumnIndex(FortniteTable.LOGO_ID));
+                bean.lanuage = cursor.getString(cursor.getColumnIndex(FortniteTable.LANGUAGE));
+
                 beans.add(bean);
             }
         }
@@ -411,7 +411,20 @@ public class DBHepler {
         String CATEGORY = "Category";
         String LOGO_ID = "logo_id";
         String LANGUAGE = "language";
+    }
 
-
+    public interface FortniteTable {//Fortnite武器表
+        String ID = "ID";
+        String NAME= "Name";
+        String DPS = "DPS";
+        String DAMAGE = "Damage";
+        String FIRE_RATE = "Fire_Rate";
+        String MAGAZINE = "Magazine_Size";
+        String RELOAD_TIME = "Reload_Time";
+        String MUNTION = "Muntion";
+        String RARITY = "Rarity";
+        String CATEGORY = "Category";
+        String LOGO_ID = "logo_id";
+        String LANGUAGE = "language";
     }
 }

@@ -30,6 +30,21 @@ public class WeaponBean implements Serializable{
     public String impact;
     public String hitRangeLeeway;
 
+    //Fortnite字段
+    public String id;
+    public String dps;
+    public String fireRate;
+    public String magazineSize;
+    public String reloadTime;
+    public String muntion;
+    public String rarity;
+
+
+
+
+
+
+
 
 
 }
