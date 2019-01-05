@@ -3,88 +3,95 @@ package com.igameguide.pubg.detail;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
 import com.igameguide.pubg.R;
 import com.igameguide.pubg.detail.bean.Paiwei;
-import com.igameguide.pubg.detail.bean.SeasonDetail;
 import com.igameguide.pubg.util.ConstantValue;
 import com.igameguide.pubg.util.ToastUtil;
 import com.igameguide.pubg.util.defaulthelper.CommonActivityViewHelper;
-
-import java.text.DecimalFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class DetailActivity extends AppCompatActivity implements DetailContract.View, View.OnClickListener {
-    @BindView(R.id.tv_region_middle_title)
-    TextView tvRegionMiddleTitle;
-    @BindView(R.id.iv_region_right)
-    ImageView ivRegionRight;
-    @BindView(R.id.tv_mode_middle_title)
-    TextView tvModeMiddleTitle;
-    @BindView(R.id.iv_mode_right)
-    ImageView ivModeRight;
-    @BindView(R.id.wins)
-    TextView wins;
-    @BindView(R.id.wins_lv)
-    TextView winsLv;
-    @BindView(R.id.top10)
-    TextView top10;
-    @BindView(R.id.maxkill)
-    TextView maxkill;
-    @BindView(R.id.longestKill)
-    TextView longestKill;
-    @BindView(R.id.headshotKills)
-    TextView headshotKills;
-    @BindView(R.id.timeSurvivedAvg)
-    TextView timeSurvivedAvg;
-    @BindView(R.id.kd)
-    TextView kd;
-    @BindView(R.id.rl_default)
-    RelativeLayout rlDefault;
-    @BindView(R.id.rl_region)
-    RelativeLayout rlRegion;
-    @BindView(R.id.rl_mode)
-    RelativeLayout rlMode;
-    @BindView(R.id.picker)
-    NumberPickerView picker;
-    @BindView(R.id.rl_done)
-    RelativeLayout rlDone;
-    @BindView(R.id.ll_pick)
-    LinearLayout llPick;
+
+
     @BindView(R.id.iv_left_icon)
     ImageView ivLeftIcon;
     @BindView(R.id.titletext)
     TextView titletext;
     @BindView(R.id.titlebar)
     RelativeLayout titlebar;
-    @BindView(R.id.tv_region_left)
-    TextView tvRegionLeft;
-    @BindView(R.id.tv_mode_left)
-    TextView tvModeLeft;
-
-
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_region_middle_title)
+    TextView tvRegionMiddleTitle;
+    @BindView(R.id.iv_region_right)
+    ImageView ivRegionRight;
+    @BindView(R.id.rl_region)
+    RelativeLayout rlRegion;
+    @BindView(R.id.tv_mode_middle_title)
+    TextView tvModeMiddleTitle;
+    @BindView(R.id.iv_mode_right)
+    ImageView ivModeRight;
+    @BindView(R.id.rl_mode)
+    RelativeLayout rlMode;
+    @BindView(R.id.score)
+    TextView score;
+    @BindView(R.id.wins)
+    TextView wins;
+    @BindView(R.id.win_lv)
+    TextView winLv;
+    @BindView(R.id.top10)
+    TextView top10;
+    @BindView(R.id.kills)
+    TextView kills;
+    @BindView(R.id.kd)
+    TextView kd;
+    @BindView(R.id.matchesPlayed)
+    TextView matchesPlayed;
+    @BindView(R.id.rl_done)
+    RelativeLayout rlDone;
+    @BindView(R.id.picker)
+    NumberPickerView picker;
+    @BindView(R.id.ll_pick)
+    LinearLayout llPick;
+    @BindView(R.id.rl_default)
+    RelativeLayout rlDefault;
+    @BindView(R.id.Top3s)
+    TextView Top3s;
+    @BindView(R.id.Top5s)
+    TextView Top5s;
+    @BindView(R.id.Top6s)
+    TextView Top6s;
+    @BindView(R.id.Top12s)
+    TextView Top12s;
+    @BindView(R.id.Top25s)
+    TextView Top25s;
     private DetailContract.Presenter mPresenter;
     private CommonActivityViewHelper mCommonHelper;
     private String mRegion;
     private String mPlayerName;
     private String mMode;
+    private String mPlatform;
     private String[] mRegionArray = new String[]{"pc-as", "pc-eu", "pc-jp", "pc-kakao", "pc-krjp", "pc-na", "pc-oc"
             , "pc-ru", "pc-sa", "pc-sea", "pc-tournament"};
     private String[] mRegionNamesArray = new String[]{"Asia", "Europe", "Japan", "Kakao", "Korea", "North America", "Oceania"
             , "Russia", "South and Central America", "South East Asia", "Tournaments"};
     private String[] mModeArray = new String[]{"solo", "squad", "duo"};
-    private String[] mModeNameArray;
+    private String[] mModeNameArray = new String[]{"单排", "双排", "多排"};
+    private String[] mPlatformArray = new String[]{"pc", "xbl", "psn"};
+
     private int mSelectRegionIndex = -1;
     private int mSelectModeIndex = -1;
+    private int mSelectPlatformIndex = -1;
     private boolean isRegion = false;
 
 
@@ -107,8 +114,6 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         llPick.setOnClickListener(this);
         ivLeftIcon.setOnClickListener(this);
         titletext.setOnClickListener(this);
-
-        mModeNameArray = new String[]{getResources().getString(R.string.solo), getResources().getString(R.string.duo), getResources().getString(R.string.squad)};
     }
 
 
@@ -118,7 +123,8 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     private void load() {
 //        mRegion = mRegionArray[0];
 //        mPlayerName = "White-Mickey";
-        mPresenter.loadPlayerData(mRegion, mPlayerName, null);
+//        mPlayerName = "xl_0";
+        mPresenter.loadFortnitetrackerPlayerInfo(mPlayerName, mPlatform);
     }
 
     @Override
@@ -134,77 +140,42 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     }
 
     @Override
-    public void onLoadSucess(SeasonDetail seasonDetail) {
+    public void onLoadSucess(Paiwei paiwei) {
         dismissLoading();
-        ToastUtil.showToas(getResources().getString(R.string.network_success));
-        if (seasonDetail != null) {
-            if (TextUtils.equals(mModeArray[0], mMode)) {
-                updateUi(seasonDetail.solo);
-            } else if (TextUtils.equals(mModeArray[1], mMode)) {
-                updateUi(seasonDetail.squad);
-            } else if (TextUtils.equals(mModeArray[2], mMode)) {
-                updateUi(seasonDetail.duo);
-            }
+        ToastUtil.showToas("网络请求成功");
+        updateUi(paiwei);
 
-        }
+
     }
 
 
     private void updateUi(Paiwei paiwei) {
-        if (paiwei == null) {//没有查询结果的情况
-            wins.setText("0");
-            winsLv.setText("0%");
-
-            top10.setText("0");
-            maxkill.setText("0");
-            longestKill.setText("0 meter");
-            headshotKills.setText("0%");
-            timeSurvivedAvg.setText("0 minute");
-            kd.setText("0");
+        if (paiwei != null) {
+            score.setText(paiwei.score);
+            wins.setText(paiwei.winsStr);
+            winLv.setText(paiwei.winLv);
+            top10.setText(paiwei.top10sStr);
+            Top3s.setText(paiwei.top3s);
+            Top5s.setText(paiwei.top5s);
+            Top6s.setText(paiwei.top6s);
+            Top12s.setText(paiwei.top12s);
+            Top25s.setText(paiwei.top25s);
+            kills.setText(paiwei.killsStr);
+            kd.setText(paiwei.kd);
+            matchesPlayed.setText(paiwei.matchesPlayed);
         } else {
-            wins.setText(String.valueOf((int) paiwei.wins));
-
-            float winsl = 0;
-            DecimalFormat df = new DecimalFormat("#.00");
-            if (paiwei.roundsPlayed != 0) {
-                winsl = paiwei.wins / paiwei.roundsPlayed;
-            }
-            if (winsl > 0 && winsl < 1) {
-                winsl *= 100;
-            }
-
-            winsLv.setText(df.format(winsl) + "%");
-
-            top10.setText(String.valueOf(paiwei.top10s));
-            maxkill.setText(String.valueOf(paiwei.maxKillStreaks));
-            longestKill.setText(df.format(paiwei.longestKill) + " meter");
-
-            float killsl = 0;
-            if (paiwei.kills != 0) {
-                killsl = paiwei.headshotKills / paiwei.kills;
-            }
-
-            if (killsl > 0 && killsl < 1) {
-                killsl *= 100;
-            }
-
-            headshotKills.setText(df.format(killsl) + "%");
-
-
-            float survivedAvg = 0;
-            if (paiwei.roundsPlayed != 0) {
-                survivedAvg = paiwei.timeSurvived / (60 * paiwei.roundsPlayed);
-
-            }
-            timeSurvivedAvg.setText(df.format(survivedAvg) + " minute");
-
-            String kdStr = "";
-            if (paiwei.roundsPlayed == 0) {
-                kdStr = "Perfect";
-            } else {
-                kdStr = String.valueOf(paiwei.kills / (paiwei.roundsPlayed - paiwei.wins));
-            }
-            kd.setText(kdStr);
+            score.setText("0");
+            wins.setText("0");
+            winLv.setText("0%");
+            top10.setText("0");
+            Top3s.setText("0");
+            Top5s.setText("0");
+            Top6s.setText("0");
+            Top12s.setText("0");
+            Top25s.setText("0");
+            kills.setText("0");
+            kd.setText("0");
+            matchesPlayed.setText("0");
         }
 
 
@@ -228,7 +199,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
 
         Thread.dumpStack();
         dismissLoading();
-        ToastUtil.showToas(getResources().getString(R.string.network_error));
+        ToastUtil.showToas("网络请求错误");
     }
 
     @Override
@@ -237,7 +208,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
             case R.id.rl_region:
                 isRegion = true;
                 llPick.setVisibility(View.VISIBLE);
-                picker.refreshByNewDisplayedValues(mRegionNamesArray);
+                picker.refreshByNewDisplayedValues(mPlatformArray);
                 break;
             case R.id.rl_mode:
                 isRegion = false;
@@ -246,24 +217,24 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
                 break;
             case R.id.rl_done:
                 llPick.setVisibility(View.INVISIBLE);
-                if (isRegion) {
-                    mSelectRegionIndex = picker.getPickedIndexRelativeToRaw();
-                    if (mSelectRegionIndex >= 0 && mSelectRegionIndex < mRegionArray.length) {
-                        mRegion = mRegionArray[mSelectRegionIndex];
-                        tvRegionMiddleTitle.setText(mRegionNamesArray[mSelectRegionIndex]);
-                    }
+                mSelectPlatformIndex = picker.getPickedIndexRelativeToRaw();
+//                if (isRegion) {
+//                    mSelectRegionIndex = picker.getPickedIndexRelativeToRaw();
+//                    if (mSelectRegionIndex >= 0 && mSelectRegionIndex < mRegionArray.length) {
+//                        mRegion = mRegionArray[mSelectRegionIndex];
+//                    }
+//
+//                } else {
+//                    mSelectModeIndex = picker.getPickedIndexRelativeToRaw();
+//                    if (mSelectModeIndex >= 0 && mSelectModeIndex < mModeArray.length) {
+//                        mMode = mModeArray[mSelectModeIndex];
+//                    }
+//
+//                }
 
-
-                } else {
-                    mSelectModeIndex = picker.getPickedIndexRelativeToRaw();
-                    if (mSelectModeIndex >= 0 && mSelectModeIndex < mModeArray.length) {
-                        mMode = mModeArray[mSelectModeIndex];
-                        tvModeMiddleTitle.setText(mModeNameArray[mSelectModeIndex]);
-                    }
-
-                }
-
-                if (mSelectRegionIndex >= 0 && mSelectModeIndex >= 0) {
+                if (mSelectPlatformIndex >= 0 && mSelectPlatformIndex < mPlatformArray.length) {
+                    mPlatform = mPlatformArray[mSelectPlatformIndex];
+                    tvRegionMiddleTitle.setText(mPlatform);
                     load();
                 }
 
