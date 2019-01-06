@@ -3,18 +3,24 @@ package com.igameguide.pubg.detail;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-
 import com.igameguide.pubg.R;
+import com.igameguide.pubg.detail.adapter.DetailAdapter;
 import com.igameguide.pubg.detail.bean.Paiwei;
 import com.igameguide.pubg.util.ConstantValue;
 import com.igameguide.pubg.util.ToastUtil;
 import com.igameguide.pubg.util.defaulthelper.CommonActivityViewHelper;
+
+import java.io.Serializable;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,20 +49,6 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     ImageView ivModeRight;
     @BindView(R.id.rl_mode)
     RelativeLayout rlMode;
-    @BindView(R.id.score)
-    TextView score;
-    @BindView(R.id.wins)
-    TextView wins;
-    @BindView(R.id.win_lv)
-    TextView winLv;
-    @BindView(R.id.top10)
-    TextView top10;
-    @BindView(R.id.kills)
-    TextView kills;
-    @BindView(R.id.kd)
-    TextView kd;
-    @BindView(R.id.matchesPlayed)
-    TextView matchesPlayed;
     @BindView(R.id.rl_done)
     RelativeLayout rlDone;
     @BindView(R.id.picker)
@@ -65,16 +57,8 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     LinearLayout llPick;
     @BindView(R.id.rl_default)
     RelativeLayout rlDefault;
-    @BindView(R.id.Top3s)
-    TextView Top3s;
-    @BindView(R.id.Top5s)
-    TextView Top5s;
-    @BindView(R.id.Top6s)
-    TextView Top6s;
-    @BindView(R.id.Top12s)
-    TextView Top12s;
-    @BindView(R.id.Top25s)
-    TextView Top25s;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
     private DetailContract.Presenter mPresenter;
     private CommonActivityViewHelper mCommonHelper;
     private String mRegion;
@@ -93,6 +77,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     private int mSelectModeIndex = -1;
     private int mSelectPlatformIndex = -1;
     private boolean isRegion = false;
+    private DetailAdapter mAdapter;
 
 
     @Override
@@ -114,6 +99,11 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         llPick.setOnClickListener(this);
         ivLeftIcon.setOnClickListener(this);
         titletext.setOnClickListener(this);
+        mAdapter = new DetailAdapter(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(mAdapter);
+        mAdapter.showPreQuery();
+
     }
 
 
@@ -140,42 +130,17 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     }
 
     @Override
-    public void onLoadSucess(Paiwei paiwei) {
+    public void onLoadSucess(List<Serializable> resp) {
         dismissLoading();
         ToastUtil.showToas("网络请求成功");
-        updateUi(paiwei);
 
-
+        updateUi(resp);
     }
 
 
-    private void updateUi(Paiwei paiwei) {
-        if (paiwei != null) {
-            score.setText(paiwei.score);
-            wins.setText(paiwei.winsStr);
-            winLv.setText(paiwei.winLv);
-            top10.setText(paiwei.top10sStr);
-            Top3s.setText(paiwei.top3s);
-            Top5s.setText(paiwei.top5s);
-            Top6s.setText(paiwei.top6s);
-            Top12s.setText(paiwei.top12s);
-            Top25s.setText(paiwei.top25s);
-            kills.setText(paiwei.killsStr);
-            kd.setText(paiwei.kd);
-            matchesPlayed.setText(paiwei.matchesPlayed);
-        } else {
-            score.setText("0");
-            wins.setText("0");
-            winLv.setText("0%");
-            top10.setText("0");
-            Top3s.setText("0");
-            Top5s.setText("0");
-            Top6s.setText("0");
-            Top12s.setText("0");
-            Top25s.setText("0");
-            kills.setText("0");
-            kd.setText("0");
-            matchesPlayed.setText("0");
+    private void updateUi(List<Serializable> resp) {
+        if (resp != null) {
+            mAdapter.setData(resp);
         }
 
 

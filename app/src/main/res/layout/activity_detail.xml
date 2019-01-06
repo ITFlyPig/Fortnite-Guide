@@ -6,490 +6,133 @@
 
     <RelativeLayout
         android:id="@+id/titlebar"
-        android:background="@color/main_color"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:background="@color/main_color">
 
         <ImageView
             android:id="@+id/iv_left_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:src="@mipmap/back"
-            android:layout_width="16dp"
-            android:layout_height="16dp" />
+            android:src="@mipmap/back" />
+
         <TextView
             android:id="@+id/titletext"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/data"
             android:textColor="@color/white"
-            android:textSize="@dimen/title_text_size"
-            android:text="@string/data"/>
+            android:textSize="@dimen/title_text_size" />
 
     </RelativeLayout>
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/rl_region"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/titlebar"
         android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:background="@color/main_color"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/rl_region"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/main_color"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp">
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:text="@string/region"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/tv_region_middle_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_sel_color"
-                    android:layout_centerInParent="true"
-                    android:textSize="@dimen/text_size" />
-
-                <ImageView
-                    android:id="@+id/iv_region_right"
-                    android:layout_width="18dp"
-                    android:layout_height="9dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_down"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_mode"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@color/main_color"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:text="@string/mode"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/tv_mode_middle_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_sel_color"
-                    android:textSize="@dimen/text_size" />
-
-                <ImageView
-                    android:id="@+id/iv_mode_right"
-                    android:layout_width="18dp"
-                    android:layout_height="9dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/icon_down"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Score"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="wins"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/wins"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Win%"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/win_lv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Top 10"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/top10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Kills"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/kills"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="K/d"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/kd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Matches Played"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/matchesPlayed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Top 3s"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/Top3s"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Top 5s"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/Top5s"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Top 6s"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/Top6s"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Top 12s"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/Top12s"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15dp"
-                    android:text="Top 25s"
-                    android:textSize="@dimen/text_size" />
-
-                <TextView
-                    android:id="@+id/Top25s"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="15dp"
-                    android:textSize="@dimen/text_size" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/gray" />
-
-
-            </RelativeLayout>
-
-
-        </LinearLayout>
-    </ScrollView>
+            android:paddingLeft="15dp"
+            android:text="@string/region"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/tv_region_middle_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/text_sel_color"
+            android:textSize="@dimen/text_size" />
+
+        <ImageView
+            android:id="@+id/iv_region_right"
+            android:layout_width="18dp"
+            android:layout_height="9dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_down" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_region"
+        android:layout_marginTop="1px"
+        android:background="@color/main_color"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="@string/mode"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/tv_mode_middle_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_sel_color"
+            android:textSize="@dimen/text_size" />
+
+        <ImageView
+            android:id="@+id/iv_mode_right"
+            android:layout_width="18dp"
+            android:layout_height="9dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_down" />
+    </RelativeLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_region"
+        android:visibility="visible" />
 
 
     <LinearLayout
 
         android:id="@+id/ll_pick"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:visibility="invisible"
         android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:visibility="invisible">
 
         <RelativeLayout
             android:id="@+id/rl_done"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/gray">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/done"
                 android:layout_alignParentRight="true"
-                android:padding="6dp"/>
+                android:padding="6dp"
+                android:text="@string/done" />
         </RelativeLayout>
 
         <cn.carbswang.android.numberpickerview.library.NumberPickerView

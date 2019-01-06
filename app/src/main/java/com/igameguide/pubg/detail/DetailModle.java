@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.igameguide.pubg.detail.bean.HItemBean;
 import com.igameguide.pubg.detail.bean.Paiwei;
 import com.igameguide.pubg.detail.bean.PlayerInfo;
 import com.igameguide.pubg.detail.bean.SeasonDetail;
@@ -14,6 +15,10 @@ import com.igameguide.pubg.util.ServerUrls;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailModle {
     /**
@@ -251,16 +256,28 @@ public class DetailModle {
                                 return;
                             }
 
+                            List<Serializable> respList = new ArrayList<>();
                             JSONObject jsonObject = JSONObject.parseObject(resp);
-                            Paiwei paiwei = Paiwei.parseForfornitegame(jsonObject);
+                            //解析得到网格的数据
+                            Paiwei paiwei = Paiwei.parseForHeaderBean(jsonObject);
                             if (paiwei == null) {
-                                if (view != null) {
-                                    view.onLoadFail();
-                                }
-                                return;
+                                paiwei = Paiwei.getEmptyHeaderBean();
+                            }
+                            respList.add(paiwei);
+
+                            //解析得到水平的数据
+                            List<HItemBean> hHist = Paiwei.parseForHItems(jsonObject);
+                            if (hHist != null) {
+                                HItemBean titleBean = new HItemBean();
+                                titleBean.isTitle = true;
+                                respList.add(titleBean);
+                                respList.addAll(hHist);
                             }
 
-                            view.onLoadSucess(paiwei);
+                            //解析的得到列表的数据
+
+
+                            view.onLoadSucess(respList);
                             return;
 
                         }

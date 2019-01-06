@@ -3,10 +3,14 @@ package com.igameguide.pubg.detail.bean;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 排位的信息
  */
-public class Paiwei {
+public class Paiwei implements Serializable {
 
     public float assists;
     public float bestRankPoint;
@@ -57,6 +61,9 @@ public class Paiwei {
     public String top12s = "0";
     public String top25s = "0";
 
+    public List<HeaderBean> headerBeans;
+    public List<HItemBean> hItemBeans;
+
 
     public static Paiwei parseForfornitegame(JSONObject jsonObject) {
         if (jsonObject == null) {
@@ -70,37 +77,135 @@ public class Paiwei {
         int size = jsonArray.size();
         for (int i = 0; i < size; i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-           String key = obj.getString("key");
-           String value = obj.getString("value");
-           if (key.equals("Score")) {
-               paiwei.score = value;
-           } else if (key.equals("Wins")) {
-               paiwei.winsStr = value;
-           } else if (key.equals("Win%")) {
-               paiwei.winLv = value;
-           } else if (key.equals("Top 10")) {
-               paiwei.top10sStr = value;
-           } else if (key.equals("Kills")) {
-               paiwei.killsStr = value;
-           } else if (key.equals("K/d")) {
-               paiwei.kd = value;
-           } else if (key.equals("Matches Played")) {
-               paiwei.matchesPlayed = value;
-           } else if (key.equals("Top 3s")) {
-               paiwei.top3s = value;
-           }  else if (key.equals("Top 5s")) {
-               paiwei.top5s = value;
-           } else if (key.equals("Top 6s")) {
-               paiwei.top6s = value;
-           } else if (key.equals("Top 12s")) {
-               paiwei.top12s = value;
-           } else if (key.equals("Top 25s")) {
-               paiwei.top25s = value;
-           }
+            String key = obj.getString("key");
+            String value = obj.getString("value");
+            if (key.equals("Score")) {
+                paiwei.score = value;
+            } else if (key.equals("Wins")) {
+                paiwei.winsStr = value;
+            } else if (key.equals("Win%")) {
+                paiwei.winLv = value;
+            } else if (key.equals("Top 10")) {
+                paiwei.top10sStr = value;
+            } else if (key.equals("Kills")) {
+                paiwei.killsStr = value;
+            } else if (key.equals("K/d")) {
+                paiwei.kd = value;
+            } else if (key.equals("Matches Played")) {
+                paiwei.matchesPlayed = value;
+            } else if (key.equals("Top 3s")) {
+                paiwei.top3s = value;
+            } else if (key.equals("Top 5s")) {
+                paiwei.top5s = value;
+            } else if (key.equals("Top 6s")) {
+                paiwei.top6s = value;
+            } else if (key.equals("Top 12s")) {
+                paiwei.top12s = value;
+            } else if (key.equals("Top 25s")) {
+                paiwei.top25s = value;
+            }
 
         }
         return paiwei;
     }
+
+
+    public static Paiwei parseForHeaderBean(JSONObject jsonObject) {
+        if (jsonObject == null) {
+            return null;
+        }
+        JSONArray jsonArray = jsonObject.getJSONArray("lifeTimeStats");
+        if (jsonArray == null) {
+            return null;
+        }
+        Paiwei paiwei = new Paiwei();
+        List<HeaderBean> list = new ArrayList<>();
+        paiwei.headerBeans = list;
+        int size = jsonArray.size();
+        for (int i = 0; i < size; i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            String key = obj.getString("key");
+            String value = obj.getString("value");
+            String showKey = null;
+            if (key.equals("Score")) {
+                showKey = "Score";
+            } else if (key.equals("Wins")) {
+                showKey = "wins";
+            } else if (key.equals("Win%")) {
+                showKey = "Win%";
+            } else if (key.equals("Top 10")) {
+                showKey = "Top 10";
+            } else if (key.equals("Kills")) {
+                showKey = "Kills";
+            } else if (key.equals("K/d")) {
+                showKey = "K/d";
+            } else if (key.equals("Matches Played")) {
+                showKey = "Matches Played";
+            } else if (key.equals("Top 3s")) {
+                showKey = "Top 3s";
+            } else if (key.equals("Top 5s")) {
+                showKey = "Top 5s";
+            } else if (key.equals("Top 6s")) {
+                showKey = "Top 6s";
+            } else if (key.equals("Top 12s")) {
+                showKey = "Top 12s";
+            } else if (key.equals("Top 25s")) {
+                showKey = "Top 25s";
+            }
+            HeaderBean bean = new HeaderBean();
+            bean.key = showKey;
+            bean.value = value;
+            list.add(bean);
+
+        }
+        return paiwei;
+    }
+
+    /**
+     * 构造空的显示数据
+     *
+     * @return
+     */
+    public static Paiwei getEmptyHeaderBean() {
+        String[] keys = new String[]{"Score", "wins", "Win%", "Top 10", "Kills", "K/d", "Matches Played", "Top 3s",
+                "Top 5s", "Top 6s", "top 12s", "Top 25s"};
+        Paiwei paiwei = new Paiwei();
+        paiwei.headerBeans = new ArrayList<>();
+
+        for (String key : keys) {
+            HeaderBean bean = new HeaderBean();
+            bean.key = key;
+            bean.value = "0";
+            paiwei.headerBeans.add(bean);
+        }
+        return paiwei;
+
+    }
+
+
+    public static List<HItemBean> parseForHItems(JSONObject jsonObject) {
+        if (jsonObject == null) {
+            return null;
+        }
+        JSONArray jsonArray = jsonObject.getJSONArray("recentMatches");
+        if (jsonArray == null) {
+            return null;
+        }
+        List<HItemBean> list = new ArrayList<>();
+        int size = jsonArray.size();
+        for (int i = 0; i < size; i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            HItemBean hItemBean = new HItemBean();
+            hItemBean.date = obj.getString("dateCollected");
+            hItemBean.kills = obj.getString("kills");
+            hItemBean.rating = obj.getString("trnRating");
+            hItemBean.score = obj.getString("score");
+            list.add(hItemBean);
+        }
+        return list;
+    }
+
+
 }
 
 

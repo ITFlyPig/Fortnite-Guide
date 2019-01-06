@@ -5,6 +5,9 @@ import com.igameguide.pubg.base.BasePresenter;
 import com.igameguide.pubg.base.BaseView;
 import com.igameguide.pubg.detail.bean.Paiwei;
 
+import java.io.Serializable;
+import java.util.List;
+
 public class DetailContract {
 
     interface View extends BaseView<Presenter> {
@@ -13,7 +16,7 @@ public class DetailContract {
 
         void dismissLoading();
 
-        void onLoadSucess(Paiwei paiwei);
+        void onLoadSucess(List<Serializable> resp);
 
         void onLoadFail();
 
