@@ -18,7 +18,7 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white"
+            android:background="@color/main_color"
             android:visibility="visible"
             tl:tl_textSelectColor="@color/text_sel_color"
             tl:tl_textUnselectColor="@color/text_video_tab_unsel_color" />

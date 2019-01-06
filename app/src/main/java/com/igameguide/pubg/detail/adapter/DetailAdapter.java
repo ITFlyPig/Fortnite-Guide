@@ -12,7 +12,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.igameguide.pubg.R;
-import com.igameguide.pubg.detail.GridHeaderView;
 import com.igameguide.pubg.detail.bean.HItemBean;
 import com.igameguide.pubg.detail.bean.HeaderBean;
 import com.igameguide.pubg.detail.bean.Paiwei;

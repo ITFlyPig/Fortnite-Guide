@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -18,6 +20,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 
@@ -29,11 +32,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private String[] mTitles = new String[]{"战绩", "视频", "武器", "壁纸"};
     private List<Fragment> mFragments;
     private int[] mIconUnselectIds = {
-            R.mipmap.icon_data_unsel, R.mipmap.icon_guides_unsel,
-             R.mipmap.icon_weapon_unsel, R.mipmap.icon_video_unsel, R.mipmap.icon_wallpaper_nusel};
+            R.mipmap.icon_data_unsel, R.mipmap.icon_video_unsel,
+             R.mipmap.icon_weapon_unsel, R.mipmap.icon_wallpaper_nusel, R.mipmap.icon_guides_unsel,};
     private int[] mIconSelectIds = {
-            R.mipmap.icon_data_sel, R.mipmap.icon_guides_sel,
-             R.mipmap.icon_weapon_sel, R.mipmap.icon_video_sel, R.mipmap.icon_wallpaper_sel};
+            R.mipmap.icon_data_sel, R.mipmap.icon_video_sel,
+             R.mipmap.icon_weapon_sel,  R.mipmap.icon_wallpaper_sel, R.mipmap.icon_guides_sel,};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
 
@@ -47,22 +50,25 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         viewPager = findViewById(R.id.viewpager);
         tabLayout = findViewById(R.id.tablayout);
 
+        String language = Locale.getDefault().getLanguage();
+        String country = getResources().getConfiguration().locale.getCountry();
+        Log.d("wyl", "language:" + language + " country:" + country);
+        if (language.equals("en")) {
+            if (country.equals("US")) {
+                mTitles = new String[]{"战绩", "武器"};
+                mIconUnselectIds = new int[] {R.mipmap.icon_data_unsel, R.mipmap.icon_weapon_unsel};
+                mIconSelectIds = new int[] {R.mipmap.icon_data_sel, R.mipmap.icon_weapon_sel};
+            }
+        }
 
         mFragments = new ArrayList<>();
         for (int i = 0; i < mTitles.length; i++) {
             String title = mTitles[i];
-            if (i == 0) {
-                mFragments.add(StandingsFragment.getInstance());
-            } else if (i == 1){
-                mFragments.add(VideoFragment.getInstance());
-            } else if (i == 2) {
-                mFragments.add(WeaponFragment.getInstance());
-            } else if (i == 3) {
-                mFragments.add(WallPaperFragment.getInstance());
-            } else {
-                mFragments.add(StandingsFragment.getInstance());
+            Fragment f = getFragmentByName(title);
+            if (f == null) {
+                continue;
             }
-
+            mFragments.add(f);
             mTabEntities.add(new TabEntity(title, mIconSelectIds[i], mIconUnselectIds[i]));
         }
 
@@ -152,5 +158,22 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    private Fragment getFragmentByName(String name) {
+        if (TextUtils.isEmpty(name)) {
+            return null;
+        }
+        if (TextUtils.equals(name, "战绩")) {
+            return StandingsFragment.getInstance();
+        } else if (TextUtils.equals(name, "视频")) {
+            return VideoFragment.getInstance();
+        }else if (TextUtils.equals(name, "武器")) {
+            return WeaponFragment.getInstance();
+        }else if (TextUtils.equals(name, "壁纸")) {
+            return WallPaperFragment.getInstance();
+        }
+        return null;
+
     }
 }
