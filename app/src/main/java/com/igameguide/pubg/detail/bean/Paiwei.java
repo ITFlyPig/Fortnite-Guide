@@ -1,5 +1,7 @@
 package com.igameguide.pubg.detail.bean;
 
+import android.text.TextUtils;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -196,7 +198,15 @@ public class Paiwei implements Serializable {
         for (int i = 0; i < size; i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
             HItemBean hItemBean = new HItemBean();
-            hItemBean.date = obj.getString("dateCollected");
+            String dateStr = obj.getString("dateCollected");
+            if (!TextUtils.isEmpty(dateStr)) {
+                int start = dateStr.indexOf("-");
+                int end = dateStr.indexOf("T");
+                if (start >= 0 && start < end) {
+                    start++;
+                    hItemBean.date = dateStr.substring(start, end);
+                }
+            }
             hItemBean.kills = obj.getString("kills");
             hItemBean.rating = obj.getString("trnRating");
             hItemBean.score = obj.getString("score");
