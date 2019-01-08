@@ -16,6 +16,8 @@ public class ConfirmDialog {
         public void onConfirmClick();
     }
 
+    private static AlertDialog dialog;
+
     /**
      * @Title: show
      * @Description: 显示Dialog
@@ -31,7 +33,7 @@ public class ConfirmDialog {
         TextView confirm = (TextView) view.findViewById(R.id.confirm);
         TextView cancel = (TextView) view.findViewById(R.id.cancel);
         // 创建Dialog
-        final AlertDialog dialog = new AlertDialog.Builder(activity).create();
+        dialog = new AlertDialog.Builder(activity).create();
         dialog.setCancelable(false);// 设置点击dialog以外区域不取消Dialog
         dialog.show();
         dialog.setContentView(view);
@@ -40,7 +42,7 @@ public class ConfirmDialog {
 
         // 确定
         confirm.setOnClickListener(v -> {
-            dialog.dismiss();
+//            dialog.dismiss();
             confirmListenerTwo.onConfirmClick();
         });
         // 取消
@@ -78,4 +80,9 @@ public class ConfirmDialog {
         return width;
     }
 
+    public static void dismiss() {
+        if (dialog != null) {
+            dialog.dismiss();
+        }
+    }
 }

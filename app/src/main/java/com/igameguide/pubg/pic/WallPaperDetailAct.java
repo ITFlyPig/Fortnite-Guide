@@ -20,7 +20,10 @@ import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.igameguide.pubg.R;
 import com.igameguide.pubg.base.GlideApp;
+import com.igameguide.pubg.home.EventModel;
 import com.igameguide.pubg.util.ConfirmDialog;
+import com.igameguide.pubg.util.Constant;
+import com.igameguide.pubg.util.PayStatusUtil;
 import com.igameguide.pubg.util.ToastUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Progress;
@@ -34,6 +37,9 @@ import com.unity3d.services.monetization.UnityMonetization;
 import com.unity3d.services.monetization.placementcontent.ads.IShowAdListener;
 import com.unity3d.services.monetization.placementcontent.ads.ShowAdPlacementContent;
 import com.unity3d.services.monetization.placementcontent.core.PlacementContent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 
@@ -55,7 +61,7 @@ public class WallPaperDetailAct extends AppCompatActivity implements View.OnClic
     private String mUrl;
     private String mTitle;
     private PromptDialog mPromptDialog;
-    private String unityGameID = "2986658";
+    private String unityGameID = "2986654";
     private String rewardedPlacementId = "rewardedVideo";
     private boolean isOk = false;
 
@@ -64,6 +70,7 @@ public class WallPaperDetailAct extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_detail);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
 
         ivBtnDownload.setOnClickListener(this);
 
@@ -121,6 +128,10 @@ public class WallPaperDetailAct extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_btn_download:
+
+                if (PayStatusUtil.isSubAvailable()) {
+                    isOk = true;
+                }
 
                 if (!isOk) {
                     showDialog();
@@ -192,6 +203,7 @@ public class WallPaperDetailAct extends AppCompatActivity implements View.OnClic
             viewAd();
         }, () -> {
             //订阅
+            EventBus.getDefault().post(new EventModel(Constant.Event.QUERY_SUB_AND_BUY));
 
         });
     }
@@ -220,5 +232,27 @@ public class WallPaperDetailAct extends AppCompatActivity implements View.OnClic
     @Override
     public void onAdStarted(String s) {
 
+    }
+
+
+    @Subscribe
+    public void onEvent(EventModel eventModel) {
+        if (eventModel == null) {
+            return;
+        }
+        if (eventModel.code == Constant.Event.DISS_DIALOG) {
+            ConfirmDialog.dismiss();
+
+        } if (eventModel.code == Constant.Event.SHOW_DIALOG) {
+
+        }
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
