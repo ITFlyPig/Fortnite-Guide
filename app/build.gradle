@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     defaultConfig {
-        applicationId "com.igameguide.pubg"
+        applicationId "com.statstracker.forfornitegame"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -13,10 +13,34 @@ android {
         multiDexEnabled true
 
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("../app/Fortnite Stats Tracker.jks")
+            storePassword "123456"
+            keyPassword "123456"
+            keyAlias "Fortnite Stats Tracker"
+        }
+        release {
+            storeFile file("../app/Fortnite Stats Tracker.jks")
+            storePassword "123456"
+            keyPassword "123456"
+            keyAlias "Fortnite Stats Tracker"
+            defaultConfig.versionName
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
 
