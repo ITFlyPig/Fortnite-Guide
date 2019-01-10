@@ -103,6 +103,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
         mAdapter.showPreQuery();
+        tvRegionMiddleTitle.setText(getResources().getString(R.string.click_tip));
 
     }
 

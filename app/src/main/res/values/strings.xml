@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">PUBG Guide</string>
-    <string name="query">Click To View Your PUBG Stats</string>
+    <string name="app_name">Stats Tracker</string>
+    <string name="query">Click To View Your Fortnite Stats</string>
     <string name="please_input">Please Input Your Name</string>
-    <string name="region">服务器</string>
+    <string name="region">Platform</string>
     <string name="mode">Mode</string>
     <string name="done">Done</string>
     <string name="data">Your stats</string>
@@ -52,5 +52,8 @@ Congratulations you now,you get a chance for free trial VIP 7 days.</string>
     <string name="videos">Videos</string>
     <string name="weapons">Weapons</string>
     <string name="wallpapers">Wallpapers</string>
+    <string name="h_title">Recent Matchs</string>
+    <string name="grid_title">Life Time Stats</string>
+    <string name="click_tip">Click to choosr your platform</string>
 
 </resources>

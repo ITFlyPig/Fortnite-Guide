@@ -46,6 +46,10 @@ public class DetailAdapter extends RecyclerView.Adapter {
             View v = LayoutInflater.from(mContext).inflate(R.layout.item_title, viewGroup, false);
             vh = new VHTitle(v);
             Log.d("wyl", "onCreateViewHolder VHTitle");
+        } else if (viewType == ItemType.GRID_TITLE) {
+            View v = LayoutInflater.from(mContext).inflate(R.layout.item_grid_title, viewGroup, false);
+            vh = new VHGridTitle(v);
+            Log.d("wyl", "onCreateViewHolder VHGridTitle");
         } else {
             View v = LayoutInflater.from(mContext).inflate(R.layout.item_horizontal, viewGroup, false);
             vh = new VHHorizontal(v);
@@ -101,12 +105,15 @@ public class DetailAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
-            return ItemType.GRID_ITEM;
+            return ItemType.GRID_TITLE;
         } else if (position == 1) {
+            return ItemType.GRID_ITEM;
+        } else if (position == 2) {
             return ItemType.H_TITLE;
         } else {
             return ItemType.H_ITEM;
         }
+
     }
 
     public static class VHGrid extends RecyclerView.ViewHolder {
@@ -121,6 +128,13 @@ public class DetailAdapter extends RecyclerView.Adapter {
     public static class VHTitle extends RecyclerView.ViewHolder {
 
         public VHTitle(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+
+    public static class VHGridTitle extends RecyclerView.ViewHolder {
+
+        public VHGridTitle(@NonNull View itemView) {
             super(itemView);
         }
     }
@@ -146,6 +160,9 @@ public class DetailAdapter extends RecyclerView.Adapter {
     public void showPreQuery() {//显示查询前的UI
         Paiwei paiwei = Paiwei.getEmptyHeaderBean();
         mData.clear();
+        HItemBean gridTitleBean = new HItemBean();
+        gridTitleBean.isGridTitle = true;
+        mData.add(gridTitleBean);
         mData.add(paiwei);
         notifyDataSetChanged();
 

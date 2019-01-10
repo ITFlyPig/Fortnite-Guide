@@ -8,4 +8,5 @@ public class HItemBean implements Serializable {
     public String kills;
     public String rating;
     public boolean isTitle;
+    public boolean isGridTitle;
 }

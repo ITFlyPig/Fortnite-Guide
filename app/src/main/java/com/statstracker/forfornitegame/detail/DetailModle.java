@@ -259,9 +259,14 @@ public class DetailModle {
                             List<Serializable> respList = new ArrayList<>();
                             JSONObject jsonObject = JSONObject.parseObject(resp);
                             //解析得到网格的数据
+                            HItemBean gridTitleBean = new HItemBean();
+                            gridTitleBean.isGridTitle = true;
                             Paiwei paiwei = Paiwei.parseForHeaderBean(jsonObject);
                             if (paiwei == null) {
+                                respList.add( gridTitleBean);
                                 paiwei = Paiwei.getEmptyHeaderBean();
+                            } else {
+                                respList.add( gridTitleBean);
                             }
                             respList.add(paiwei);
 

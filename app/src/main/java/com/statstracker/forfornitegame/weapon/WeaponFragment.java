@@ -41,7 +41,7 @@ public class WeaponFragment extends Fragment implements View.OnClickListener {
     LinearLayout llContainer;
     Unbinder unbinder;
     private InterstitialAd mInterstitialAd;
-    private String[] mTitles = new String[]{"武器"};
+    private String[] mTitles;
     private List<Fragment> mFragments;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private MyPagerAdapter mAdapter;
@@ -56,6 +56,7 @@ public class WeaponFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mTitles = new String[]{getResources().getString(R.string.weapons)};
 
         mFragments = new ArrayList<>();
 
